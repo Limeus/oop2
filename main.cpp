@@ -1,8 +1,10 @@
 #include "include/five.h"
 #include <iostream>
+#include <Windows.h>
 
 
 int main() {
+    SetConsoleOutputCP(CP_UTF8);
     try {
         Five num1("4321"); // Пятиричное число
         Five num2("4231"); // Пятиричное число

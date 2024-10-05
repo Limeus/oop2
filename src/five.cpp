@@ -86,7 +86,7 @@ Five& Five::operator=(Five&& other) noexcept {
 // Арифметические операторы
 Five& Five::operator+=(const Five& other) {
     size_t maxSize = std::max(size, other.size);
-    unsigned char* result = new unsigned char[maxSize + 1]{0};
+    auto* result = new unsigned char[maxSize + 1]{0};
     unsigned char carry = 0;
 
     for (size_t i = 0; i < maxSize; i++) {
@@ -103,7 +103,7 @@ Five& Five::operator+=(const Five& other) {
         maxSize++;
     }
 
-    delete[] digits;
+    clear();
     digits = result;
     size = maxSize;
 
@@ -134,7 +134,7 @@ Five Five::operator+(const Five& other) const {
         result.size = max_size; // Если переноса нет, уменьшаем размер
     }
 
-    return result;
+    return std::move(result);
 }
 
 Five Five::operator-(const Five& other) const {
@@ -167,7 +167,7 @@ Five Five::operator-(const Five& other) const {
         result.size--;
     }
 
-    return result;
+    return std::move(result);
 }
 
 Five& Five::operator-=(const Five& other) {
